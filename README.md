@@ -5,7 +5,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/platform-windows-blue"/>
-  <img src="https://img.shields.io/badge/dotnet-8.0-brightgreen"/>
+  <img src="https://img.shields.io/badge/dotnet-9.0.8-brightgreen"/>
   <img src="https://img.shields.io/badge/status-active-success"/>
 </p>
 
