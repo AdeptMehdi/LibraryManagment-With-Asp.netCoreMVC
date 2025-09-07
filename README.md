@@ -6,7 +6,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/platform-windows-blue"/>
   <img src="https://img.shields.io/badge/dotnet-8.0-brightgreen"/>
-  <img src="https://img.shields.io/badge/license-MIT-yellow"/>
   <img src="https://img.shields.io/badge/status-active-success"/>
 </p>
 
@@ -73,13 +72,7 @@ dotnet run
 
 Pull requests and suggestions are welcome!
 
----
 
-## 📄 License
-
-MIT
-
----
 
 <h1 align="center">📚 کتابخانه مدیریت</h1>
 <p align="center">
@@ -137,14 +130,6 @@ dotnet run
 * **Font Awesome**
 * **SweetAlert2**
 
----
 
-## 🤝 مشارکت
 
-Pull Request و پیشنهادات خوش‌آمدند!
 
----
-
-## 📄 لایسنس
-
-MIT
