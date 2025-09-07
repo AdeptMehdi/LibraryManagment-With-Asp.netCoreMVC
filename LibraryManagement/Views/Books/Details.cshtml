@@ -1,0 +1,30 @@
+﻿@model LibraryManagement.Models.Book
+
+@{
+    ViewData["Title"] = "Book Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1><i class="fas fa-book"></i> @Model.Title</h1>
+<p><strong>Author:</strong> @Model.Author</p>
+
+<p><strong>Status:</strong>
+    @if (Model.IsAvailable)
+    {
+        <span class="text-success"><i class="fas fa-check-circle"></i> Available</span>
+    }
+    else
+    {
+        var lastLoan = Model.Loans.OrderByDescending(l => l.LoanDate).FirstOrDefault();
+        if(lastLoan != null)
+        {
+            <span class="text-warning"><i class="fas fa-hourglass-half"></i> Loaned to @lastLoan.User.FullName</span>
+            <br />
+            <small>Loan Date: @lastLoan.LoanDate.ToString("yyyy/MM/dd")</small>
+            <br />
+            <small>Return Date: @(lastLoan.ReturnDate.HasValue ? lastLoan.ReturnDate.Value.ToString("yyyy/MM/dd") : "Not returned yet")</small>
+        }
+    }
+</p>
+
+<a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>

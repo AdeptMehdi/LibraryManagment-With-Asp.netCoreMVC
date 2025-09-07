@@ -1,0 +1,43 @@
+﻿@model IEnumerable<LibraryManagement.Models.Loan>
+
+@{
+    ViewData["Title"] = "My Loans";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1><i class="fas fa-book-reader"></i> My Loans</h1>
+
+<table class="table table-striped mt-3">
+    <thead class="table-dark">
+    <tr>
+        <th>Book</th>
+        <th>Loan Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var loan in Model)
+    {
+        <tr>
+            <td>@loan.Book.Title by @loan.Book.Author</td>
+            <td>@loan.LoanDate.ToString("yyyy/MM/dd HH:mm")</td>
+            <td>
+                @(loan.ReturnDate.HasValue 
+                    ? loan.ReturnDate.Value.ToString("yyyy/MM/dd HH:mm") 
+                    : "Not returned yet")
+            </td>
+            <td>
+                @if (loan.Book.IsAvailable)
+                {
+                    <span class="badge bg-success">Available</span>
+                }
+                else
+                {
+                    <span class="badge bg-warning text-dark">Loaned</span>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

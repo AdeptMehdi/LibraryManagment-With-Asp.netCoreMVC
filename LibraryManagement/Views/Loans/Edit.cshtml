@@ -1,0 +1,77 @@
+﻿@model LibraryManagement.Models.Loan
+
+@{
+    ViewData["Title"] = "Edit Loan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1><i class="fas fa-edit"></i> Edit Loan</h1>
+
+<div class="card mt-3 shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <strong>Edit Loan Info</strong>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="BookId" class="form-label"><i class="fas fa-book"></i> Book</label>
+                <select asp-for="BookId" class="form-select" asp-items="ViewBag.BookId"></select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UserId" class="form-label"><i class="fas fa-user"></i> User</label>
+                <select asp-for="UserId" class="form-select" asp-items="ViewBag.UserId"></select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LoanDate" class="form-label"><i class="fas fa-calendar-alt"></i> Loan Date</label>
+                <input asp-for="LoanDate" class="form-control" type="datetime-local" value="@Model.LoanDate.ToString("yyyy-MM-ddTHH:mm")" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ReturnDate" class="form-label"><i class="fas fa-undo"></i> Return Date</label>
+                <input asp-for="ReturnDate" class="form-control" type="datetime-local" value="@(Model.ReturnDate.HasValue? Model.ReturnDate.Value.ToString("yyyy-MM-ddTHH:mm") : "")" />
+                <small class="form-text text-muted">Leave empty if book not returned yet.</small>
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Save Changes
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        @if (ViewData.ModelState.IsValid && TempData["SuccessMessage"] != null)
+        {
+                <text>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: '@TempData["SuccessMessage"]',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
+                </text>
+        }
+        @if (!ViewData.ModelState.IsValid)
+        {
+                <text>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Please check the form for errors.',
+                    });
+                </text>
+        }
+    </script>
+}

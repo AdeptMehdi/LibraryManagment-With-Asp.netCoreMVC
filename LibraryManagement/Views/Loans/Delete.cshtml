@@ -1,0 +1,26 @@
+﻿@model LibraryManagement.Models.Loan
+
+<h1>Delete Loan</h1>
+
+<div class="card">
+    <div class="card-body">
+        <p>Are you sure you want to delete this loan?</p>
+        <dl class="row">
+            <dt class="col-sm-3">Book</dt>
+            <dd class="col-sm-9">@Model.Book.Title by @Model.Book.Author</dd>
+
+            <dt class="col-sm-3">User</dt>
+            <dd class="col-sm-9">@Model.User.FullName</dd>
+
+            <dt class="col-sm-3">Loan Date</dt>
+            <dd class="col-sm-9">@Model.LoanDate.ToString("yyyy/MM/dd")</dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@using LibraryManagement.Models;
+@model LibraryManagement.Models.DashboardViewModel
+
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-4">📊 Admin Dashboard</h1>
+
+<div class="row mb-4">
+    <div class="col-md-2">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5>Total Books</h5>
+                <p class="h4">@Model.TotalBooks</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5>Available</h5>
+                <p class="h4">@Model.AvailableBooks</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <h5>Loaned</h5>
+                <p class="h4">@Model.LoanedBooks</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5>Users</h5>
+                <p class="h4">@Model.TotalUsers</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-body">
+                <h5>Active Loans</h5>
+                <p class="h4">@Model.ActiveLoans</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>🕒 Recent Loans</h3>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Book</th>
+            <th>User</th>
+            <th>Loan Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model.RecentLoans)
+        {
+            <tr>
+                <td>@loan.Book.Title</td>
+                <td>@loan.User.FullName</td>
+                <td>@loan.LoanDate.ToString("yyyy/MM/dd HH:mm")</td>
+                <td>
+                    @if (loan.ReturnDate == null)
+                    {
+                        <span class="text-danger">Pending</span>
+                    }
+                    else
+                    {
+                        <span class="text-success">Returned</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

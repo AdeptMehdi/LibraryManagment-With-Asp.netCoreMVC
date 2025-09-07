@@ -1,0 +1,101 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using LibraryManagement.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+@{
+    ViewData["Title"] = "Home";
+    string fullName = "";
+    if (SignInManager.IsSignedIn(User))
+    {
+        var user = UserManager.GetUserAsync(User).Result;
+        if (user != null)
+        {
+            fullName = user.FullName;
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LibraryManagement</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="text-center mb-5">
+            <h1><i class="fas fa-book"></i> Welcome to Library Management</h1>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <p class="lead">Hello, <strong>@fullName</strong>!</p>
+            }
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm border-primary h-100">
+                    <div class="card-body">
+                        <i class="fas fa-book fa-2x mb-2 text-primary"></i>
+                        <h5 class="card-title">Books</h5>
+                        <p class="card-text">View all books in the library.</p>
+                        <a class="btn btn-primary" asp-controller="Books" asp-action="Index">Go <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm border-success h-100">
+                    <div class="card-body">
+                        <i class="fas fa-user fa-2x mb-2 text-success"></i>
+                        <h5 class="card-title">My Loans</h5>
+                        <p class="card-text">Check your borrowed books.</p>
+                        <a class="btn btn-success" asp-controller="Loans" asp-action="MyLoans">Go <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm border-warning h-100">
+                    <div class="card-body">
+                        <i class="fas fa-chart-line fa-2x mb-2 text-warning"></i>
+                        <h5 class="card-title">Admin Dashboard</h5>
+                        <p class="card-text">Only visible for admins.</p>
+                        <a class="btn btn-warning" asp-controller="Admin" asp-action="Dashboard">Go <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm border-info h-100">
+                    <div class="card-body">
+                        <i class="fas fa-info-circle fa-2x mb-2 text-info"></i>
+                        <h5 class="card-title">About</h5>
+                        <p class="card-text">Learn more about this library system.</p>
+                        <a class="btn btn-info" asp-controller="Home" asp-action="Privacy">Go <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <script>
+            Swal.fire({
+                title: 'Welcome, @fullName!',
+                text: 'You are successfully logged in.',
+                icon: 'success',
+                timer: 2500,
+                showConfirmButton: false
+            });
+        </script>
+    }
+</body>
+</html>
