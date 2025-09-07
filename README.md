@@ -1,5 +1,3 @@
-📚 LibraryManagement - Full README
-
 <h1 align="center">📚 LibraryManagement</h1>
 <p align="center">
   <b>A Modern, Simple, and Responsive Library Management System with ASP.NET Core MVC</b>
